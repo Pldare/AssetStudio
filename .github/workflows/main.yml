@@ -37,8 +37,6 @@ jobs:
     # 添加 MSBuild.exe 到环境变量: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1
-      with:
-        vs-version: '[16.10,16.11)'
 
     # 安装 NuGet
     - name: Setup NuGet
