@@ -49,6 +49,10 @@ jobs:
     # 还原 NuGet 包
     - name: NuGet restore
       run: nuget restore
+      
+    - name: test include
+      run: |
+        ls "C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include"
 
     # 编译整个项目
     - name: Build the solution
