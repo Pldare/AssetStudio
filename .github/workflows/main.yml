@@ -5,7 +5,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
   workflow_dispatch:
 
 jobs:
@@ -26,13 +25,9 @@ jobs:
 
     - name: Install FBX SDK
       run: |
-        md fbx
-        cd fbx
         (new-object System.Net.WebClient).DownloadFile("https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-0-1/fbx202001_fbxsdk_vs2017_win.exe", "./fbxsdk.exe")
         Start-Process -FilePath "./fbxsdk.exe" /S -Wait
-        cd ..
-
-
+    
     # 安装 .NET Core
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
