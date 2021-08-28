@@ -27,7 +27,7 @@ jobs:
       run: |
         (new-object System.Net.WebClient).DownloadFile("https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-0-1/fbx202001_fbxsdk_vs2017_win.exe", "./fbxsdk.exe")
         Start-Process -FilePath "./fbxsdk.exe" /S -Wait
-        ls "C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include"
+      # ls "C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include"
     
     # 安装 .NET Core
     - name: Install .NET Core
@@ -50,15 +50,16 @@ jobs:
     - name: NuGet restore
       run: nuget restore
       
-    - name: test include
-      run: |
-        ls "C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include"
-
     # 编译整个项目
     - name: Build the solution
       run: msbuild /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: AssetStudioGUI\bin\Release\net472
 
     # 执行单元测试
     #- name: Execute unit tests
